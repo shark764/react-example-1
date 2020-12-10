@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Calc from './Calc';
+import Examples from './Containers/Examples';
+import JSX from './Containers/JSX';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
 
       <main className="App-main">
         <Calc />
+        <Examples />
+        <JSX />
       </main>
     </div>
   );
