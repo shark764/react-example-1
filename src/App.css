@@ -82,3 +82,12 @@
   border-radius: 8px;
   padding: 5px;
 }
+
+.App-menu ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+.App-menu ul li {
+  display: inline;
+  margin: 15px;
+}

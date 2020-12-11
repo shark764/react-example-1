@@ -1,0 +1,68 @@
+.dialpad-container {
+  background-color: white;
+  width: 320px;
+  padding: 20px;
+  margin: 30px auto;
+  height: 420px;
+  text-align: center;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.dialpad-output {
+  font-size: 2rem;
+  height: 60px;
+  font-weight: bold;
+  color: deepskyblue;
+}
+.dialpad-contact-found {
+  font-size: 0.8rem;
+  color: slategray;
+}
+
+.dialpad-row {
+  margin: 0 auto;
+  width: 280px;
+  clear: both;
+  text-align: center;
+}
+
+.dialpad-digit {
+  float: left;
+  padding: 10px 30px;
+  width: 30px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.dialpad-digit:hover {
+  background-color: azure;
+}
+.dialpad-digit:active {
+  background-color: lightcyan;
+}
+
+.dialpad-digit-letters {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.dialpad-caller,
+.dialpad-calling {
+  float: left;
+  background-color: yellowgreen;
+  padding: 4px 30px;
+  margin: 10px 5px;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.dialpad-caller:hover {
+  background-color: olivedrab;
+}
+.dialpad-calling {
+  background-color: whitesmoke;
+  color: salmon;
+}
+.dialpad-calling:hover {
+  background-color: salmon;
+  color: white;
+}
