@@ -91,3 +91,24 @@
   display: inline;
   margin: 15px;
 }
+
+/* Form */
+.App-users-table tr th,
+.App-users-table tr td {
+  padding: 5px;
+  text-align: start;
+}
+
+select {
+  background-color: transparent;
+  font-size: 24px;
+  padding: 15px;
+  margin: 20px;
+  border-radius: 8px;
+  border: 2px solid #282c34;
+}
+select:focus {
+  outline: none;
+  border-radius: 8px;
+  border: 4px solid #61dafb;
+}

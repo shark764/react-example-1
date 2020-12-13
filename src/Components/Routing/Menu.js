@@ -17,6 +17,9 @@ function Menu() {
         <li>
           <Link to="/dial">Dialpad</Link>
         </li>
+        <li>
+          <Link to="/api">API Fetching</Link>
+        </li>
       </ul>
     </div>
   );
