@@ -20,6 +20,9 @@ function Menu() {
         <li>
           <Link to="/api">API Fetching</Link>
         </li>
+        <li>
+          <Link to="/styled">Styling</Link>
+        </li>
       </ul>
     </div>
   );

@@ -1,35 +1,38 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Calc from '../../Calc';
 import APIInteractions from '../../Containers/APIInteractions';
 import DialPad from '../../Containers/DialPad';
 import Examples from '../../Containers/Examples';
 import JSX from '../../Containers/JSX';
-import Menu from './Menu';
+import Styled from '../../Containers/Styled';
+import Users from '../../Containers/Styled/Users';
 
 function Routing() {
   return (
-    <Router>
-      <Menu />
-
-      <Switch>
-        <Route exact path="/">
-          <Calc />
-        </Route>
-        <Route path="/samples">
-          <Examples />
-        </Route>
-        <Route path="/jsx">
-          <JSX />
-        </Route>
-        <Route path="/dial">
-          <DialPad />
-        </Route>
-        <Route path="/api">
-          <APIInteractions />
-        </Route>
-      </Switch>
-    </Router>
+    <Switch>
+      <Route exact path="/">
+        <Calc />
+      </Route>
+      <Route path="/samples">
+        <Examples />
+      </Route>
+      <Route path="/jsx">
+        <JSX />
+      </Route>
+      <Route path="/dial">
+        <DialPad />
+      </Route>
+      <Route path="/api">
+        <APIInteractions />
+      </Route>
+      <Route path="/styled">
+        <Styled />
+      </Route>
+      <Route path="/api-styled">
+        <Users />
+      </Route>
+    </Switch>
   );
 }
 
