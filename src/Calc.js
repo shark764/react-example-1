@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
 
+function renderComp(props) {
+  return (
+    <div>
+      I love ReactJs
+      <p>Hello World, I'm {props.name}</p>
+    </div>
+  );
+}
+
 function Calc() {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
@@ -8,6 +17,8 @@ function Calc() {
     setNum1(0);
     setNum2(0);
   };
+
+  const frenderComp = renderComp({ name: 'Hernandez' });
 
   return (
     <>
@@ -28,6 +39,9 @@ function Calc() {
       <button type="button" onClick={reset} disabled={num1 === 0 && num2 === 0}>
         Reset
       </button>
+
+      {renderComp({ name: 'Daniel' })}
+      {frenderComp}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Header, Nav, Text } from 'grommet';
-import { Link } from 'react-router-dom';
+import { Box, Header, Nav, Select, Text } from 'grommet';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Calculator,
   CloudComputer,
@@ -10,6 +10,9 @@ import {
   Phone,
   Reactjs,
 } from 'grommet-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { setTheme } from '../../redux/actions';
+import { themes } from '../../utils';
 
 const links = [
   { text: 'Math', to: '/', icon: <Calculator color="accent-1" /> },
@@ -27,9 +30,20 @@ const links = [
     to: '/api-styled',
     icon: <CloudComputer color="accent-1" />,
   },
+  {
+    text: 'Redux',
+    to: '/redux',
+    icon: <Reactjs color="accent-1" />,
+  },
 ];
 
 function PageHeader() {
+  const location = useLocation();
+  const theme = useSelector((state) => state.main.theme);
+  const dispatch = useDispatch();
+
+  console.log({ location });
+
   return (
     <Header background="brand" pad="medium">
       <Nav direction="row">
@@ -38,11 +52,23 @@ function PageHeader() {
             <Link key={link.to} to={link.to}>
               {link.icon}
               {` `}
-              <Text color="accent-1">{link.text}</Text>
+              <Text
+                color={link.to === location.pathname ? 'accent-2' : 'accent-1'}
+              >
+                {link.text}
+              </Text>
             </Link>
           );
         })}
       </Nav>
+
+      <Box justify="end">
+        <Select
+          value={theme}
+          options={Object.keys(themes)}
+          onChange={({ option }) => dispatch(setTheme(option))}
+        />
+      </Box>
     </Header>
   );
 }

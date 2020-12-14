@@ -5,6 +5,7 @@ import APIInteractions from '../../Containers/APIInteractions';
 import DialPad from '../../Containers/DialPad';
 import Examples from '../../Containers/Examples';
 import JSX from '../../Containers/JSX';
+import ReduxExample from '../../Containers/ReduxExample';
 import Styled from '../../Containers/Styled';
 import Users from '../../Containers/Styled/Users';
 
@@ -31,6 +32,9 @@ function Routing() {
       </Route>
       <Route path="/api-styled">
         <Users />
+      </Route>
+      <Route path="/redux">
+        <ReduxExample />
       </Route>
     </Switch>
   );

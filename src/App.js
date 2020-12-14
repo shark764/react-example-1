@@ -1,37 +1,32 @@
 import React from 'react';
-import { Grommet } from 'grommet';
+import { Box, Grommet } from 'grommet';
 import './App.css';
 import Routing from './Components/Routing';
 import PageHeader from './Components/Routing/PageHeader';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import PageFooter from './Components/Routing/PageFooter';
-
-const theme = {
-  global: {
-    colors: {
-      brand: '#25424C',
-      'accent-1': '#FB770D',
-      'accent-2': '#FFA45B',
-      'accent-3': '#FFEBDB',
-    },
-  },
-};
+import { useSelector } from 'react-redux';
+import { themes } from './utils';
 
 function App() {
+  const selectedTheme = useSelector((state) => state.main.theme);
+
   return (
-    <Router>
-      <Grommet theme={theme}>
+    <HashRouter>
+      <Grommet theme={themes[selectedTheme]}>
         <PageHeader />
 
-        <div className="App">
-          <main className="App-main">
-            <Routing />
-          </main>
-        </div>
+        <Box pad="medium">
+          <div className="App">
+            <main className="App-main">
+              <Routing />
+            </main>
+          </div>
+        </Box>
 
         <PageFooter />
       </Grommet>
-    </Router>
+    </HashRouter>
   );
 }
 
