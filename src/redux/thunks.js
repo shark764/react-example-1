@@ -1,7 +1,13 @@
 import Axios from 'axios';
+import { getEntries } from '../Containers/Contentful/sdk';
 import dataSlice from './reducers/dataSlice';
 
-const { setCategories, setSelectedCategory, setProducts } = dataSlice.actions;
+const {
+  setCategories,
+  setSelectedCategory,
+  setProducts,
+  setRecords,
+} = dataSlice.actions;
 
 export function getCategories() {
   return async (dispatch, getState) => {
@@ -41,5 +47,18 @@ export function getProducts() {
     });
 
     dispatch(setProducts(products));
+  };
+}
+
+export function getRecords() {
+  return async (dispatch, getState) => {
+    const { searchString } = getState().data;
+
+    const records = await getEntries({
+      content_type: 'records',
+      'fields.title[match]': searchString,
+    });
+
+    dispatch(setRecords(records));
   };
 }

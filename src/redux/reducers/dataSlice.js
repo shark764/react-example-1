@@ -4,6 +4,8 @@ const initialState = {
   categories: [],
   selectedCategory: null,
   products: [],
+  searchString: '',
+  records: [],
 };
 
 const dataSlice = createSlice({
@@ -18,6 +20,12 @@ const dataSlice = createSlice({
     },
     setProducts: (state, action) => {
       state.products = action.payload;
+    },
+    setSearchString: (state, action) => {
+      state.searchString = action.payload;
+    },
+    setRecords: (state, action) => {
+      state.records = action.payload;
     },
   },
 });

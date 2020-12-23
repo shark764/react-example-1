@@ -1,15 +1,17 @@
 import React from 'react';
-import { Box, Header, Nav, Select, Text } from 'grommet';
+import { Box, Header, Nav, Select, Text, TextInput } from 'grommet';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Calculator,
   CloudComputer,
+  CloudSoftware,
   Css3,
   DocumentStore,
   GraphQl,
   Html5,
   Phone,
   Reactjs,
+  Search,
   Tools,
 } from 'grommet-icons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,34 +19,50 @@ import { useFormatMessage } from 'react-intl-hooks';
 import { setTheme } from '../../redux/actions';
 import configurationSlice from '../../redux/reducers/configurationSlice';
 import { themes } from '../../utils';
+import dataSlice from '../../redux/reducers/dataSlice';
 
 const { setLang } = configurationSlice.actions;
+const { setSearchString } = dataSlice.actions;
 
 const links = [
-  { text: 'Math', to: '/', icon: <Calculator color="accent-1" /> },
-  { text: 'JSX', to: '/jsx', icon: <Reactjs color="accent-1" /> },
-  { text: 'Components', to: '/samples', icon: <Html5 color="accent-1" /> },
-  { text: 'Dialpad', to: '/dial', icon: <Phone color="accent-1" /> },
+  { text: 'Math', to: '/', icon: (props) => <Calculator {...props} /> },
+  { text: 'JSX', to: '/jsx', icon: (props) => <Reactjs {...props} /> },
+  { text: 'Components', to: '/samples', icon: (props) => <Html5 {...props} /> },
+  { text: 'Dialpad', to: '/dial', icon: (props) => <Phone {...props} /> },
   {
     text: 'API Fetching',
     to: '/api',
-    icon: <DocumentStore color="accent-1" />,
+    icon: (props) => <DocumentStore {...props} />,
   },
-  { text: 'Styling', to: '/styled', icon: <Css3 color="accent-1" /> },
+  { text: 'Styling', to: '/styled', icon: (props) => <Css3 {...props} /> },
   {
     text: 'Users',
     to: '/api-styled',
-    icon: <CloudComputer color="accent-1" />,
+    icon: (props) => <CloudComputer {...props} />,
   },
-  { text: 'Redux', to: '/redux', icon: <Reactjs color="accent-1" /> },
-  { text: 'Redux Toolkit', to: '/toolkit', icon: <Tools color="accent-1" /> },
-  { text: 'React Query', to: '/rquery', icon: <GraphQl color="accent-1" /> },
+  { text: 'Redux', to: '/redux', icon: (props) => <Reactjs {...props} /> },
+  {
+    text: 'Redux Toolkit',
+    to: '/toolkit',
+    icon: (props) => <Tools {...props} />,
+  },
+  {
+    text: 'React Query',
+    to: '/rquery',
+    icon: (props) => <GraphQl {...props} />,
+  },
+  {
+    text: 'Contentful CMS',
+    to: '/contentful',
+    icon: (props) => <CloudSoftware {...props} />,
+  },
 ];
 
 function PageHeader() {
   const location = useLocation();
   const theme = useSelector((state) => state.main.theme);
   const language = useSelector((state) => state.configuration.language);
+  const searchString = useSelector((state) => state.data.searchString);
   const dispatch = useDispatch();
 
   const translateMessage = useFormatMessage();
@@ -63,18 +81,27 @@ function PageHeader() {
       <Nav direction="row">
         {links.map((link) => {
           return (
-            <Link key={link.to} to={link.to}>
-              {link.icon}
-              {` `}
-              <Text
-                color={link.to === location.pathname ? 'accent-2' : 'accent-1'}
-              >
-                {link.text}
-              </Text>
+            <Link key={link.to} to={link.to} title={link.text}>
+              {link.icon({
+                color: link.to === location.pathname ? 'accent-2' : 'accent-1',
+              })}
             </Link>
           );
         })}
       </Nav>
+
+      {location.pathname === '/contentful' && (
+        <Box>
+          <TextInput
+            icon={<Search />}
+            placeholder="search ..."
+            value={searchString}
+            onChange={(event) =>
+              dispatch(setSearchString(event.target.value || ''))
+            }
+          />
+        </Box>
+      )}
 
       <Box justify="end" direction="row" gap="medium">
         <Select

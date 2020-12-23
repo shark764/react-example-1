@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Calc from '../../Calc';
 import APIInteractions from '../../Containers/APIInteractions';
+import Contentful from '../../Containers/Contentful';
 import DialPad from '../../Containers/DialPad';
 import Examples from '../../Containers/Examples';
 import JSX from '../../Containers/JSX';
@@ -43,6 +44,9 @@ function Routing() {
       </Route>
       <Route path="/rquery">
         <ReactQueryExample />
+      </Route>
+      <Route path="/contentful">
+        <Contentful />
       </Route>
     </Switch>
   );
