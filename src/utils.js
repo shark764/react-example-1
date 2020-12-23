@@ -133,10 +133,10 @@ export const themes = {
   firefly: {
     global: {
       colors: {
-        brand: '#272822',
-        'accent-1': '#f92672',
-        'accent-2': '#66d9ef',
-        'accent-3': '#fd971f',
+        brand: '#1e2328',
+        'accent-1': '#f5b301',
+        'accent-2': '#3b3f46',
+        'accent-3': '#fed053',
       },
     },
   },
@@ -207,6 +207,36 @@ export const themes = {
         'accent-1': '#950740',
         'accent-2': '#c3073f',
         'accent-3': '#6f2232',
+      },
+    },
+  },
+  sleek: {
+    global: {
+      colors: {
+        brand: '#0f292f',
+        'accent-1': '#501f3a',
+        'accent-2': '#cb2d6f',
+        'accent-3': '#14a098',
+      },
+    },
+  },
+  intrepid: {
+    global: {
+      colors: {
+        brand: '#314455',
+        'accent-1': '#c96567',
+        'accent-2': '#9e5a63',
+        'accent-3': '#97aabd',
+      },
+    },
+  },
+  effective: {
+    global: {
+      colors: {
+        brand: '#faed26',
+        'accent-1': '#46344e',
+        'accent-2': '#5a5560',
+        'accent-3': '#9b786f',
       },
     },
   },

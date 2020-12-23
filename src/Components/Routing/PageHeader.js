@@ -9,10 +9,15 @@ import {
   Html5,
   Phone,
   Reactjs,
+  Tools,
 } from 'grommet-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFormatMessage } from 'react-intl-hooks';
 import { setTheme } from '../../redux/actions';
+import configurationSlice from '../../redux/reducers/configurationSlice';
 import { themes } from '../../utils';
+
+const { setLang } = configurationSlice.actions;
 
 const links = [
   { text: 'Math', to: '/', icon: <Calculator color="accent-1" /> },
@@ -30,22 +35,29 @@ const links = [
     to: '/api-styled',
     icon: <CloudComputer color="accent-1" />,
   },
-  {
-    text: 'Redux',
-    to: '/redux',
-    icon: <Reactjs color="accent-1" />,
-  },
+  { text: 'Redux', to: '/redux', icon: <Reactjs color="accent-1" /> },
+  { text: 'Redux Toolkit', to: '/toolkit', icon: <Tools color="accent-1" /> },
 ];
 
 function PageHeader() {
   const location = useLocation();
   const theme = useSelector((state) => state.main.theme);
+  const language = useSelector((state) => state.configuration.language);
   const dispatch = useDispatch();
+
+  const translateMessage = useFormatMessage();
 
   console.log({ location });
 
   return (
     <Header background="brand" pad="medium">
+      <Text size="xxlarge" color="accent-3">
+        {translateMessage({
+          id: 'app.navbar.header',
+          defaultMessage: 'Learn React',
+        })}
+      </Text>
+
       <Nav direction="row">
         {links.map((link) => {
           return (
@@ -62,7 +74,12 @@ function PageHeader() {
         })}
       </Nav>
 
-      <Box justify="end">
+      <Box justify="end" direction="row" gap="medium">
+        <Select
+          value={language}
+          options={['en', 'es', 'fr', 'de']}
+          onChange={({ option }) => dispatch(setLang(option))}
+        />
         <Select
           value={theme}
           options={Object.keys(themes)}

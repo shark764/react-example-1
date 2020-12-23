@@ -5,11 +5,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
+import LanguageProvider from './intl/LanguageProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

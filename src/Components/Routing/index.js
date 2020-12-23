@@ -6,6 +6,7 @@ import DialPad from '../../Containers/DialPad';
 import Examples from '../../Containers/Examples';
 import JSX from '../../Containers/JSX';
 import ReduxExample from '../../Containers/ReduxExample';
+import ReduxToolkitExample from '../../Containers/ReduxToolkitExample';
 import Styled from '../../Containers/Styled';
 import Users from '../../Containers/Styled/Users';
 
@@ -35,6 +36,9 @@ function Routing() {
       </Route>
       <Route path="/redux">
         <ReduxExample />
+      </Route>
+      <Route path="/toolkit">
+        <ReduxToolkitExample />
       </Route>
     </Switch>
   );
