@@ -3,21 +3,37 @@ import { Box, DataTable, Heading, Text } from 'grommet';
 import { StatusDisabled, StatusGood, User, UserFemale } from 'grommet-icons';
 import { DateTime } from 'luxon';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
 function Users() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  const fetchUsers = useCallback(async () => {
-    const {
-      data: { data },
-    } = await Axios.get(`https://gorest.co.in/public-api/users?page=${70}`);
-    // console.log('users', data);
-    setUsers(data);
-  }, []);
+  // const fetchUsers = useCallback(async () => {
+  //   const {
+  //     data: { data },
+  //   } = await Axios.get(`https://gorest.co.in/public-api/users?page=${70}`);
+  //   // console.log('users', data);
+  //   setUsers(data);
+  // }, []);
 
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, [fetchUsers]);
+
+  const { data, error, isLoading, isFetching, status } = useQuery(
+    'users',
+    function () {
+      return Axios.get('https://gorest.co.in/public-api/users')
+        .then((result) => {
+          return result.data.data;
+        })
+        .catch((err) => {
+          console.error(err);
+          return [];
+        });
+    }
+  );
+  const users = data;
 
   return (
     <Box direction="row" pad="xxsmall" gap="medium">

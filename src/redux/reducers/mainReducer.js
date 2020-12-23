@@ -1,5 +1,5 @@
 const initialState = {
-  theme: 'light',
+  theme: 'awsmcolor',
   lang: 'es-ES',
 };
 

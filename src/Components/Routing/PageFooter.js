@@ -1,5 +1,5 @@
 import { Anchor, Box, Footer } from 'grommet';
-import { Css3, Facebook, Reactjs } from 'grommet-icons';
+import { Css3, Facebook, GraphQl, Reactjs } from 'grommet-icons';
 import React from 'react';
 
 function PageFooter() {
@@ -33,6 +33,13 @@ function PageFooter() {
           href="https://redux.js.org/"
           color="accent-1"
           icon={<Reactjs color="accent-1" />}
+          target="_blank"
+        />
+        <Anchor
+          label="React Query"
+          href="https://react-query.tanstack.com/"
+          color="accent-1"
+          icon={<GraphQl color="accent-1" />}
           target="_blank"
         />
       </Box>

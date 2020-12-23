@@ -6,6 +6,7 @@ import {
   CloudComputer,
   Css3,
   DocumentStore,
+  GraphQl,
   Html5,
   Phone,
   Reactjs,
@@ -37,6 +38,7 @@ const links = [
   },
   { text: 'Redux', to: '/redux', icon: <Reactjs color="accent-1" /> },
   { text: 'Redux Toolkit', to: '/toolkit', icon: <Tools color="accent-1" /> },
+  { text: 'React Query', to: '/rquery', icon: <GraphQl color="accent-1" /> },
 ];
 
 function PageHeader() {

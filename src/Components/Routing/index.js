@@ -5,6 +5,7 @@ import APIInteractions from '../../Containers/APIInteractions';
 import DialPad from '../../Containers/DialPad';
 import Examples from '../../Containers/Examples';
 import JSX from '../../Containers/JSX';
+import ReactQueryExample from '../../Containers/ReactQueryExample';
 import ReduxExample from '../../Containers/ReduxExample';
 import ReduxToolkitExample from '../../Containers/ReduxToolkitExample';
 import Styled from '../../Containers/Styled';
@@ -39,6 +40,9 @@ function Routing() {
       </Route>
       <Route path="/toolkit">
         <ReduxToolkitExample />
+      </Route>
+      <Route path="/rquery">
+        <ReactQueryExample />
       </Route>
     </Switch>
   );

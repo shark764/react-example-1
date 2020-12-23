@@ -1,17 +1,33 @@
+import Axios from 'axios';
 import { Box, Button, DataTable, Text } from 'grommet';
 import { Actions, StatusDisabled, StatusGood, Tree } from 'grommet-icons';
 import React, { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories, setCurrentCategory } from '../../redux/thunks';
 
 function ReduxToolkitExample() {
-  const categories = useSelector((state) => state.data.categories);
+  // const categories = useSelector((state) => state.data.categories);
   const products = useSelector((state) => state.data.products);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCategories());
+  // }, [dispatch]);
+
+  const { data: categories, error, isLoading, isFetching, status } = useQuery(
+    'categories',
+    function () {
+      return Axios.get('https://gorest.co.in/public-api/categories')
+        .then((result) => {
+          return result.data.data;
+        })
+        .catch((err) => {
+          console.error(err);
+          return [];
+        });
+    }
+  );
 
   return (
     <Box direction="row" pad="medium" gap="medium">

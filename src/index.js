@@ -6,13 +6,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import LanguageProvider from './intl/LanguageProvider';
+import QueryProvider from './query/QueryProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <LanguageProvider>
-        <App />
-      </LanguageProvider>
+      <QueryProvider>
+        <LanguageProvider>
+          <App />
+        </LanguageProvider>
+      </QueryProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

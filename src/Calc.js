@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactQueryExample from './Containers/ReactQueryExample';
 
 function renderComp(props) {
   return (
@@ -42,6 +43,8 @@ function Calc() {
 
       {renderComp({ name: 'Daniel' })}
       {frenderComp}
+
+      <ReactQueryExample />
     </>
   );
 }

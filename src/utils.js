@@ -120,6 +120,16 @@ export const themes = {
       },
     },
   },
+  fabulous: {
+    global: {
+      colors: {
+        brand: '#801336',
+        'accent-1': '#ee4540',
+        'accent-2': '#c72c41',
+        'accent-3': '#510a32',
+      },
+    },
+  },
   monokai: {
     global: {
       colors: {
