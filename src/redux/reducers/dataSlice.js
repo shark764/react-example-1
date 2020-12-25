@@ -6,6 +6,7 @@ const initialState = {
   products: [],
   searchString: '',
   records: [],
+  assets: [],
 };
 
 const dataSlice = createSlice({
@@ -26,6 +27,12 @@ const dataSlice = createSlice({
     },
     setRecords: (state, action) => {
       state.records = action.payload;
+    },
+    addRecord: (state, action) => {
+      state.records.unshift(action.payload);
+    },
+    setAssets: (state, action) => {
+      state.assets = action.payload;
     },
   },
 });

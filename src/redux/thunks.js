@@ -1,5 +1,10 @@
 import Axios from 'axios';
-import { getEntries } from '../Containers/Contentful/sdk';
+import {
+  createEntry,
+  getAssets,
+  getEntries,
+} from '../Containers/Contentful/sdk';
+import { log } from '../utils';
 import dataSlice from './reducers/dataSlice';
 
 const {
@@ -7,10 +12,12 @@ const {
   setSelectedCategory,
   setProducts,
   setRecords,
+  setAssets,
+  addRecord,
 } = dataSlice.actions;
 
 export function getCategories() {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     const { data } = await Axios.get(
       'https://gorest.co.in/public-api/categories'
     );
@@ -59,6 +66,34 @@ export function getRecords() {
       'fields.title[match]': searchString,
     });
 
+    log('info', `Records found using "${searchString}"`, records);
+
     dispatch(setRecords(records));
+  };
+}
+
+export function createRecord(values) {
+  return async (dispatch) => {
+    try {
+      const entry = await createEntry(values);
+      log(
+        'success',
+        `Entry with id: "${entry.id}" was created and published.`,
+        entry
+      );
+      dispatch(addRecord(entry));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function getImages() {
+  return async (dispatch, getState) => {
+    const assets = await getAssets();
+
+    log('info', 'Assets retrieved', assets);
+
+    dispatch(setAssets(assets));
   };
 }

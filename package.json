@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.5.0",
     "axios": "^0.21.0",
     "contentful": "^8.1.5",
+    "contentful-management": "^7.5.1",
     "grommet": "^2.16.0",
     "grommet-icons": "^4.5.0",
     "luxon": "^1.25.0",

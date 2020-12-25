@@ -210,6 +210,16 @@ export const themes = {
       },
     },
   },
+  space: {
+    global: {
+      colors: {
+        brand: '#00739d',
+        'accent-1': '#743600',
+        'accent-2': '#eb9929',
+        'accent-3': '#65b4e1',
+      },
+    },
+  },
   contemporary: {
     global: {
       colors: {
@@ -251,3 +261,6 @@ export const themes = {
     },
   },
 };
+
+export const capitalize = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
