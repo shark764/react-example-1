@@ -11,9 +11,9 @@ const {
   setCategories,
   setSelectedCategory,
   setProducts,
-  setCountries,
+  setUsers,
   setAssets,
-  addCountry,
+  addUser,
 } = dataSlice.actions;
 
 export function getCategories() {
@@ -57,22 +57,22 @@ export function getProducts() {
   };
 }
 
-export function getCountries() {
+export function getUsers() {
   return async (dispatch, getState) => {
     const { searchString } = getState().data;
 
-    const countries = await getEntries({
-      content_type: 'countries',
-      'fields.title[match]': searchString,
+    const users = await getEntries({
+      content_type: 'users',
+      'fields.name[match]': searchString,
     });
 
-    log('info', `Countries found using "${searchString}"`, countries);
+    log('info', `Users found using "${searchString}"`, users);
 
-    dispatch(setCountries(countries));
+    dispatch(setUsers(users));
   };
 }
 
-export function createCountry(values) {
+export function createUser(values) {
   return async (dispatch) => {
     try {
       const entry = await createEntry(values);
@@ -81,7 +81,7 @@ export function createCountry(values) {
         `Entry with id: "${entry.id}" was created and published.`,
         entry
       );
-      dispatch(addCountry(entry));
+      dispatch(addUser(entry));
     } catch (error) {
       console.error(error);
     }

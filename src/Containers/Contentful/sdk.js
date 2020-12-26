@@ -45,7 +45,7 @@ export function createEntry(values) {
       .getSpace(SPACE_ID)
       .then((space) => space.getEnvironment(ENVIRONMENT))
       .then((environment) =>
-        environment.createEntry('countries', formatBody(values))
+        environment.createEntry('users', formatBody(values))
       )
       /**
        * Entry will be added as a draft,

@@ -1,16 +1,21 @@
 import { Box } from 'grommet';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { createCountry } from '../../../redux/thunks';
+import { createUser } from '../../../redux/thunks';
 import FormLayout from './FormLayout';
 
 function Form() {
   const dispatch = useDispatch();
 
   const onSubmit = (values) => {
-    console.log('values submitted', values);
+    const payload = {
+      ...values,
+      status: values.status ? 'Active' : 'Inactive',
+    };
 
-    dispatch(createCountry(values));
+    console.log('values submitted', values, payload);
+
+    dispatch(createUser(payload));
   };
 
   return (

@@ -1,11 +1,14 @@
 import {
   Box,
   Button,
+  CheckBox,
   Form,
   FormField,
+  MaskedInput,
   RadioButtonGroup,
   TextInput,
 } from 'grommet';
+import { MailOption } from 'grommet-icons';
 import React from 'react';
 
 function FormLayout({ onSubmit }) {
@@ -28,28 +31,26 @@ function FormLayout({ onSubmit }) {
         <TextInput name="name" />
       </FormField>
 
-      <FormField label="Continent" name="continent">
-        <RadioButtonGroup
-          name="continent"
-          options={['Africa', 'America', 'Asia', 'Europe', 'Oceania']}
+      <FormField label="Email" name="email" required>
+        <MaskedInput
+          name="email"
+          mask={[
+            { regexp: /^[\w\-_.]+$/, placeholder: 'example' },
+            { fixed: '@' },
+            { regexp: /^[\w]+$/, placeholder: 'my' },
+            { fixed: '.' },
+            { regexp: /^[\w]+$/, placeholder: 'com' },
+          ]}
+          icon={<MailOption />}
         />
       </FormField>
 
-      <FormField label="Language" name="language">
-        <RadioButtonGroup
-          name="language"
-          options={[
-            'Chinese',
-            'Deutsch',
-            'English',
-            'French',
-            'Italian',
-            'Japanese',
-            'Korean',
-            'Portuguese',
-            'Spanish',
-          ]}
-        />
+      <FormField name="gender">
+        <RadioButtonGroup name="gender" options={['Male', 'Female']} />
+      </FormField>
+
+      <FormField name="status">
+        <CheckBox name="status" label="Active?" />
       </FormField>
 
       <Box direction="row" justify="between" margin={{ top: 'medium' }}>

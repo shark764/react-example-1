@@ -1,7 +1,8 @@
 import { DataTable, Text } from 'grommet';
+import { StatusCritical, StatusGood, User, UserFemale } from 'grommet-icons';
 import React from 'react';
 
-function Table({ countries }) {
+function Table({ users }) {
   return (
     <DataTable
       background={{
@@ -10,25 +11,33 @@ function Table({ countries }) {
         footer: 'accent-1',
       }}
       columns={[
+        { property: 'id', primary: true, header: <Text>Id</Text> },
+        { property: 'name', header: <Text>Name</Text> },
+        { property: 'email', header: <Text>Email</Text> },
         {
-          property: 'id',
-          header: <Text>Id</Text>,
-          primary: true,
+          property: 'gender',
+          header: <Text>Gender</Text>,
+          render: (row) => {
+            return row.gender === 'Male' ? (
+              <User color="brand" />
+            ) : (
+              <UserFemale color="accent-2" />
+            );
+          },
         },
         {
-          property: 'name',
-          header: <Text>Name</Text>,
-        },
-        {
-          property: 'continent',
-          header: <Text>Continent</Text>,
-        },
-        {
-          property: 'language',
-          header: <Text>Language</Text>,
+          property: 'status',
+          header: <Text>Status</Text>,
+          render: (row) => {
+            return row.status === 'Active' ? (
+              <StatusGood color="brand" />
+            ) : (
+              <StatusCritical color="accent-1" />
+            );
+          },
         },
       ]}
-      data={countries}
+      data={users}
     />
   );
 }
