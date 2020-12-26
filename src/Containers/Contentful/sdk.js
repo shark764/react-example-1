@@ -36,16 +36,6 @@ export function entryTransformer({ fields, sys }) {
     ...fields,
     id: sys.id,
     createdAt: sys.createdAt,
-    image: {
-      ...fields.image.fields,
-      id: fields.image.sys.id,
-    },
-    tracklist: fields.tracklist
-      ? fields.tracklist.map((track) => ({
-          ...track.fields,
-          id: track.sys.id,
-        }))
-      : [],
   };
 }
 
@@ -55,7 +45,7 @@ export function createEntry(values) {
       .getSpace(SPACE_ID)
       .then((space) => space.getEnvironment(ENVIRONMENT))
       .then((environment) =>
-        environment.createEntry('records', formatBody(values))
+        environment.createEntry('countries', formatBody(values))
       )
       /**
        * Entry will be added as a draft,
@@ -76,10 +66,6 @@ export function createdEntryTransformer({ fields, sys }) {
     ...formattedFields,
     id: sys.id,
     createdAt: sys.createdAt,
-    image: {
-      id: formattedFields.image.sys.id,
-    },
-    tracklist: [],
   };
 }
 
@@ -87,18 +73,8 @@ function formatBody(values) {
   const entries = Object.entries(values);
   let fields = {};
   entries.forEach(([key, value]) => {
-    let bodyProperty = value;
-    if (key === 'image') {
-      bodyProperty = {
-        sys: {
-          type: 'Link',
-          linkType: 'Asset',
-          id: value,
-        },
-      };
-    }
     fields[key] = {
-      'en-US': bodyProperty,
+      'en-US': value,
     };
   });
   return { fields };
