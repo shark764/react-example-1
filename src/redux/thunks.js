@@ -11,9 +11,9 @@ const {
   setCategories,
   setSelectedCategory,
   setProducts,
-  setRecords,
+  setCountries,
   setAssets,
-  addRecord,
+  addCountry,
 } = dataSlice.actions;
 
 export function getCategories() {
@@ -57,22 +57,22 @@ export function getProducts() {
   };
 }
 
-export function getRecords() {
+export function getCountries() {
   return async (dispatch, getState) => {
     const { searchString } = getState().data;
 
-    const records = await getEntries({
-      content_type: 'records',
+    const countries = await getEntries({
+      content_type: 'countries',
       'fields.title[match]': searchString,
     });
 
-    log('info', `Records found using "${searchString}"`, records);
+    log('info', `Countries found using "${searchString}"`, countries);
 
-    dispatch(setRecords(records));
+    dispatch(setCountries(countries));
   };
 }
 
-export function createRecord(values) {
+export function createCountry(values) {
   return async (dispatch) => {
     try {
       const entry = await createEntry(values);
@@ -81,7 +81,7 @@ export function createRecord(values) {
         `Entry with id: "${entry.id}" was created and published.`,
         entry
       );
-      dispatch(addRecord(entry));
+      dispatch(addCountry(entry));
     } catch (error) {
       console.error(error);
     }

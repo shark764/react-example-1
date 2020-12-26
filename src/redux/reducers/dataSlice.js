@@ -5,7 +5,7 @@ const initialState = {
   selectedCategory: null,
   products: [],
   searchString: '',
-  records: [],
+  countries: [],
   assets: [],
 };
 
@@ -25,11 +25,11 @@ const dataSlice = createSlice({
     setSearchString: (state, action) => {
       state.searchString = action.payload;
     },
-    setRecords: (state, action) => {
-      state.records = action.payload;
+    setCountries: (state, action) => {
+      state.countries = action.payload;
     },
-    addRecord: (state, action) => {
-      state.records.unshift(action.payload);
+    addCountry: (state, action) => {
+      state.countries.unshift(action.payload);
     },
     setAssets: (state, action) => {
       state.assets = action.payload;
