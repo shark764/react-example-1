@@ -1,5 +1,7 @@
 import { Anchor, Box, Footer } from 'grommet';
-import { Css3, Facebook, GraphQl, Reactjs } from 'grommet-icons';
+import {
+  Css3, Facebook, GraphQl, Reactjs,
+} from 'grommet-icons';
 import React from 'react';
 
 function PageFooter() {

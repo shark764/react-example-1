@@ -1,11 +1,11 @@
 import Axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Button, Text } from 'grommet';
+import { Next, Previous } from 'grommet-icons';
 import { log } from '../../utils';
 import { setProducts } from '../../redux/actions';
 import Products from './Products';
-import { Button, Text } from 'grommet';
-import { Next, Previous } from 'grommet-icons';
 
 function ReduxExample({ products, storeProducts }) {
   const [page, setPage] = useState(1);
@@ -19,7 +19,7 @@ function ReduxExample({ products, storeProducts }) {
   const fetchProducts = useCallback(async () => {
     // callback
     const { data } = await Axios.get(
-      `https://gorest.co.in/public-api/products?page=${page}`
+      `https://gorest.co.in/public-api/products?page=${page}`,
     );
     log(null, 'Products fetched', data.data);
 
@@ -46,23 +46,35 @@ function ReduxExample({ products, storeProducts }) {
 
       <Button
         icon={<Previous />}
-        onClick={(e) => setPage((lastPage) => lastPage - 1)}
+        onClick={() => setPage((lastPage) => lastPage - 1)}
         disabled={pagination.page === 1}
       />
       <Text>
-        Showing {pagination.limit} of {pagination.total} records, page{' '}
-        {pagination.page} of {pagination.pages}
+        Showing
+        {' '}
+        {pagination.limit}
+        {' '}
+        of
+        {' '}
+        {pagination.total}
+        {' '}
+        records, page
+        {' '}
+        {pagination.page}
+        {' '}
+        of
+        {pagination.pages}
       </Text>
       <Button
         icon={<Next />}
-        onClick={(e) => setPage((lastPage) => lastPage + 1)}
+        onClick={() => setPage((lastPage) => lastPage + 1)}
         disabled={pagination.page === pagination.pages}
       />
     </div>
   );
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
     products: state.root.products,
   };

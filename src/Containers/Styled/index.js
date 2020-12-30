@@ -21,9 +21,8 @@ const TomatoColor = styled(Color)`
     color: yellow;
   }
 
-  ${(props) =>
-    props.dark &&
-    css`
+  ${(props) => props.dark
+    && css`
       background-color: black;
       color: white;
 
@@ -49,14 +48,12 @@ function Styled() {
         'gray',
         'yellow',
         'green',
-      ].map((color) => {
-        return (
-          <Color key={color} color={color} onClick={(e) => setBgColor(color)}>
-            {color}
-          </Color>
-        );
-      })}
-      <TomatoColor onClick={(e) => setBgColor('tomato')} dark>
+      ].map((color) => (
+        <Color key={color} color={color} onClick={() => setBgColor(color)}>
+          {color}
+        </Color>
+      ))}
+      <TomatoColor onClick={() => setBgColor('tomato')} dark>
         TOMATO
       </TomatoColor>
     </Container>

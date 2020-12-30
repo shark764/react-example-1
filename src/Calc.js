@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import ReactQueryExample from './Containers/ReactQueryExample';
+// import ReactQueryExample from './Containers/ReactQueryExample';
 
-function renderComp(props) {
+function renderComp({ name }) {
   return (
     <div>
       I love ReactJs
-      <p>Hello World, I'm {props.name}</p>
+      <p>
+        Hello World, I&#39;m
+        {name}
+      </p>
     </div>
   );
 }
@@ -14,7 +17,7 @@ function Calc() {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
 
-  const reset = function (e) {
+  const reset = () => {
     setNum1(0);
     setNum2(0);
   };
@@ -44,7 +47,7 @@ function Calc() {
       {renderComp({ name: 'Daniel' })}
       {frenderComp}
 
-      <ReactQueryExample />
+      {/* <ReactQueryExample /> */}
     </>
   );
 }

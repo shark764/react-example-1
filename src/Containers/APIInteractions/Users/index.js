@@ -13,9 +13,7 @@ function Users() {
   const fetchUsers = useCallback(() => {
     setLoading(true);
     fetch(`https://gorest.co.in/public-api/users?page=${page}`)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then(({ data }) => {
         setUsers(data);
       })
@@ -42,7 +40,7 @@ function Users() {
 
       {loading && (
         <div className="fa-6x">
-          <i className="fa fa-spinner fa-pulse"></i>
+          <i className="fa fa-spinner fa-pulse" />
         </div>
       )}
 
@@ -65,9 +63,7 @@ function Users() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => {
-                return <User key={user.email} user={user} />;
-              })}
+              {users.map((user) => <User key={user.email} user={user} />)}
             </tbody>
           </table>
 
@@ -78,7 +74,7 @@ function Users() {
       {error && (
         <span>
           An error has occurred.
-          {` `}
+          {' '}
           {error}
         </span>
       )}

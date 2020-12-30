@@ -10,7 +10,10 @@ function Child({ value, onRemove }) {
         borderRadius: 8,
       }}
     >
-      Child number {value}!
+      Child number
+      {' '}
+      {value}
+      !
       <button type="button" onClick={(e) => onRemove(value)}>
         X
       </button>

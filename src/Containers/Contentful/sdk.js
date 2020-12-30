@@ -5,8 +5,7 @@ export const BASE_URL = 'https://cdn.contentful.com';
 export const ENVIRONMENT = 'master';
 export const SPACE_ID = 'srlpekq85luo';
 export const ACCESS_TOKEN = 'evMFF1eK--2PX6Qqrlq8glrKOurVH1pdvaI-FRgmufU';
-export const ACCESS_TOKEN_MANAGEMENT =
-  'CFPAT-WAjUteVc06b2IhNAw7_DXGQUXCmv0ZMc6_m9obcABag';
+export const ACCESS_TOKEN_MANAGEMENT = 'CFPAT-WAjUteVc06b2IhNAw7_DXGQUXCmv0ZMc6_m9obcABag';
 
 export const client = contentful.createClient({
   space: SPACE_ID,
@@ -16,6 +15,18 @@ export const client = contentful.createClient({
 const clientManagement = contentfulManagement.createClient({
   accessToken: ACCESS_TOKEN_MANAGEMENT,
 });
+
+export function entryTransformer({ fields, sys }) {
+  return {
+    ...fields,
+    id: sys.id,
+    createdAt: sys.createdAt,
+  };
+}
+
+export function dataTransformer(data) {
+  return data.map(entryTransformer);
+}
 
 export async function getEntries(query) {
   try {
@@ -27,38 +38,8 @@ export async function getEntries(query) {
   }
 }
 
-export function dataTransformer(data) {
-  return data.map(entryTransformer);
-}
-
-export function entryTransformer({ fields, sys }) {
-  return {
-    ...fields,
-    id: sys.id,
-    createdAt: sys.createdAt,
-  };
-}
-
-export function createEntry(values) {
-  return (
-    clientManagement
-      .getSpace(SPACE_ID)
-      .then((space) => space.getEnvironment(ENVIRONMENT))
-      .then((environment) =>
-        environment.createEntry('users', formatBody(values))
-      )
-      /**
-       * Entry will be added as a draft,
-       * until we publish it
-       */
-      .then((entry) => entry.publish())
-      .then(createdEntryTransformer)
-      .catch(console.error)
-  );
-}
-
 export function createdEntryTransformer({ fields, sys }) {
-  let formattedFields = {};
+  const formattedFields = {};
   Object.entries(fields).forEach(([key, value]) => {
     formattedFields[key] = value['en-US'];
   });
@@ -71,13 +52,46 @@ export function createdEntryTransformer({ fields, sys }) {
 
 function formatBody(values) {
   const entries = Object.entries(values);
-  let fields = {};
+  const fields = {};
   entries.forEach(([key, value]) => {
     fields[key] = {
       'en-US': value,
     };
   });
   return { fields };
+}
+
+export function createEntry(values) {
+  return (
+    clientManagement
+      .getSpace(SPACE_ID)
+      .then((space) => space.getEnvironment(ENVIRONMENT))
+      .then((environment) => environment.createEntry('users', formatBody(values)))
+      /**
+       * Entry will be added as a draft,
+       * until we publish it
+       */
+      .then((entry) => entry.publish())
+      .then(createdEntryTransformer)
+      .catch(console.error)
+  );
+}
+
+export function imageTransformer({ fields, sys }) {
+  return {
+    ...fields,
+    id: sys.id,
+    createdAt: sys.createdAt,
+  };
+}
+
+export function assetTransformer(data) {
+  return data
+    .filter(
+      (asset) => asset.fields.file
+        && asset.fields.file.contentType.toLowerCase().includes('image/'),
+    )
+    .map(imageTransformer);
 }
 
 export async function getAssets() {
@@ -88,22 +102,4 @@ export async function getAssets() {
     console.error(error);
     return [];
   }
-}
-
-export function assetTransformer(data) {
-  return data
-    .filter(
-      (asset) =>
-        asset.fields.file &&
-        asset.fields.file.contentType.toLowerCase().includes('image/')
-    )
-    .map(imageTransformer);
-}
-
-export function imageTransformer({ fields, sys }) {
-  return {
-    ...fields,
-    id: sys.id,
-    createdAt: sys.createdAt,
-  };
 }

@@ -34,7 +34,7 @@ function ConditionalRendering() {
       {value === 'on' && <div>Hello!, render this when true</div>}
       {value === 'off' && <div>Hello, value is false</div>}
 
-      {value === 'on' ? <p>It's ON</p> : <p>It's OFF</p>}
+      {value === 'on' ? <p>It&#39;s ON</p> : <p>It&#39;s OFF</p>}
     </div>
   );
 }

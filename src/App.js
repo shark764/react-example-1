@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Grommet } from 'grommet';
 // import './App.css';
+import { HashRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Routing from './Components/Routing';
 import PageHeader from './Components/Routing/PageHeader';
-import { HashRouter } from 'react-router-dom';
 import PageFooter from './Components/Routing/PageFooter';
-import { useSelector } from 'react-redux';
 import { themes } from './utils';
 
 function App() {

@@ -11,25 +11,31 @@ function Products({ products }) {
         {
           property: 'price',
           header: <Text>Price</Text>,
-          render: (row) => <Text>$ {row.price}</Text>,
+          render: (row) => (
+            <Text>
+              $
+              {row.price}
+            </Text>
+          ),
         },
         {
           property: 'discount_amount',
           header: <Text>Discount Price</Text>,
           render: (row) => (
-            <Text color="accent-2">$ ${row.discount_amount}</Text>
+            <Text color="accent-2">
+              $ $
+              {row.discount_amount}
+            </Text>
           ),
         },
         {
           property: 'status',
           header: <Text>Status</Text>,
-          render: (row) => {
-            return row.status ? (
-              <StatusGood color="brand" />
-            ) : (
-              <StatusDisabled color="accent-1" />
-            );
-          },
+          render: (row) => (row.status ? (
+            <StatusGood color="brand" />
+          ) : (
+            <StatusDisabled color="accent-1" />
+          )),
         },
         {
           property: 'description',

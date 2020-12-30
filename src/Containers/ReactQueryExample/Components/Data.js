@@ -9,16 +9,23 @@ import {
 import { DateTime } from 'luxon';
 import React from 'react';
 
-function Data({ users, isLoading, isFetching, status }) {
+function Data({
+  users, isLoading, isFetching, status,
+}) {
   return (
     <>
       <Box pad="medium" align="center">
         {isFetching ? (
           <Text color="accent-1">
-            Fetching... <Refresh />
+            Fetching...
+            {' '}
+            <Refresh />
           </Text>
         ) : (
-          <Text color="brand">Status: {status}</Text>
+          <Text color="brand">
+            Status:
+            {status}
+          </Text>
         )}
       </Box>
       <DataTable
@@ -47,12 +54,11 @@ function Data({ users, isLoading, isFetching, status }) {
           {
             property: 'gender',
             header: <Text>Gender</Text>,
-            render: (datum) =>
-              datum.gender === 'Male' ? (
-                <User color="brand" size="medium" />
-              ) : (
-                <UserFemale color="accent-1" size="medium" />
-              ),
+            render: (datum) => (datum.gender === 'Male' ? (
+              <User color="brand" size="medium" />
+            ) : (
+              <UserFemale color="accent-1" size="medium" />
+            )),
           },
           {
             property: 'created_at',
@@ -60,7 +66,7 @@ function Data({ users, isLoading, isFetching, status }) {
             render: (datum) => (
               <Text size="small">
                 {DateTime.fromISO(datum.created_at).toLocaleString(
-                  DateTime.DATETIME_MED
+                  DateTime.DATETIME_MED,
                 )}
               </Text>
             ),
@@ -71,7 +77,7 @@ function Data({ users, isLoading, isFetching, status }) {
             render: (datum) => (
               <Text size="small">
                 {DateTime.fromISO(datum.updated_at).toLocaleString(
-                  DateTime.DATETIME_MED
+                  DateTime.DATETIME_MED,
                 )}
               </Text>
             ),
@@ -79,12 +85,11 @@ function Data({ users, isLoading, isFetching, status }) {
           {
             property: 'status',
             header: <Text>Status</Text>,
-            render: (datum) =>
-              datum.status === 'Active' ? (
-                <StatusGood color="brand" size="medium" />
-              ) : (
-                <StatusCritical color="accent-2" size="medium" />
-              ),
+            render: (datum) => (datum.status === 'Active' ? (
+              <StatusGood color="brand" size="medium" />
+            ) : (
+              <StatusCritical color="accent-2" size="medium" />
+            )),
           },
         ]}
         data={users}

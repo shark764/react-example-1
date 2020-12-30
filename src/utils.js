@@ -46,8 +46,7 @@ export const users = [
   },
 ];
 
-export const gorestToken =
-  '6cabfd3fc1aa17546fbfac4e0796907906638b74fe780efebf1eb803baa1e31c';
+export const gorestToken = '6cabfd3fc1aa17546fbfac4e0796907906638b74fe780efebf1eb803baa1e31c';
 
 export function log(type, msg, ...args) {
   switch (type) {
@@ -55,35 +54,35 @@ export function log(type, msg, ...args) {
       console.log(
         `%c${msg}`,
         'color: #00529B; background-color: #BDE5F8;',
-        ...args
+        ...args,
       );
       break;
     case 'success':
       console.log(
         `%c${msg}`,
         'color: #4F8A10; background-color: #DFF2BF;',
-        ...args
+        ...args,
       );
       break;
     case 'warning':
       console.log(
         `%c${msg}`,
         'color: #9F6000; background-color: #FEEFB3;',
-        ...args
+        ...args,
       );
       break;
     case 'error':
       console.log(
         `%c${msg}`,
         'color: #D8000C; background-color: #FFD2D2;',
-        ...args
+        ...args,
       );
       break;
     default:
       console.log(
         `%c${msg}`,
         'background: LightGoldenRodYellow; color: darkslategray;',
-        ...args
+        ...args,
       );
       break;
   }
@@ -262,5 +261,4 @@ export const themes = {
   },
 };
 
-export const capitalize = (string) =>
-  string.charAt(0).toUpperCase() + string.slice(1);
+export const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);

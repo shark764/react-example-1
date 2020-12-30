@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-function Example2(props) {
+function Example2({ shared }) {
   const [number, setNumber] = useState(1000);
   const [label, setLabel] = useState('hello world');
-  // console.log(props);
-  const [sharedText, setSharedText] = props.shared;
+
+  const [sharedText, setSharedText] = shared;
 
   return (
     <div className="example">
-      Hey look! I'm a functional component
+      Hey look! I&#39;m a functional component
       <br />
       <span style={{ color: 'salmon', fontWeight: 900 }}>
         I can have state too!!!!

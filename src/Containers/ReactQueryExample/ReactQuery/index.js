@@ -10,18 +10,16 @@ import LayoutForm from './LayoutForm';
 function ReactQuery() {
   const [open, setOpen] = useState(false);
   const [page] = useContext(PageContext);
-  const { data, error, isLoading, isFetching, status } = useQuery(
+  const {
+    data, error, isLoading, isFetching, status,
+  } = useQuery(
     'users',
-    function () {
-      return Axios.get(`https://gorest.co.in/public-api/users?page=${page}`)
-        .then((result) => {
-          return result.data.data;
-        })
-        .catch((err) => {
-          console.error(err);
-          return [];
-        });
-    }
+    () => Axios.get(`https://gorest.co.in/public-api/users?page=${page}`)
+      .then((result) => result.data.data)
+      .catch((err) => {
+        console.error(err);
+        return [];
+      }),
   );
 
   const onOpen = () => setOpen(true);
@@ -31,7 +29,9 @@ function ReactQuery() {
   if (isLoading) {
     return (
       <Text color="accent-1">
-        Loading... <Refresh />
+        Loading...
+        {' '}
+        <Refresh />
       </Text>
     );
   }
