@@ -25,8 +25,8 @@ function BasicFetch() {
       setUsers(data.data);
       setIsFetching(false);
       setStatus('success');
-    } catch (error) {
-      setError(error);
+    } catch (err) {
+      setError(err);
       setIsFetching(false);
       setStatus('error');
     }

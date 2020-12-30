@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Login from '../../auth0/Login';
+import Profile from '../../auth0/Profile';
 import Calc from '../../Calc';
 import APIInteractions from '../../Containers/APIInteractions';
 import Contentful from '../../Containers/Contentful';
@@ -11,6 +13,7 @@ import ReduxExample from '../../Containers/ReduxExample';
 import ReduxToolkitExample from '../../Containers/ReduxToolkitExample';
 import Styled from '../../Containers/Styled';
 import Users from '../../Containers/Styled/Users';
+import PrivateRoute from './PrivateRoute';
 
 function Routing() {
   return (
@@ -27,26 +30,32 @@ function Routing() {
       <Route path="/dial">
         <DialPad />
       </Route>
-      <Route path="/api">
+      <PrivateRoute path="/api">
         <APIInteractions />
-      </Route>
+      </PrivateRoute>
       <Route path="/styled">
         <Styled />
       </Route>
-      <Route path="/api-styled">
+      <PrivateRoute path="/api-styled">
         <Users />
-      </Route>
-      <Route path="/redux">
+      </PrivateRoute>
+      <PrivateRoute path="/redux">
         <ReduxExample />
-      </Route>
-      <Route path="/toolkit">
+      </PrivateRoute>
+      <PrivateRoute path="/toolkit">
         <ReduxToolkitExample />
-      </Route>
-      <Route path="/rquery">
+      </PrivateRoute>
+      <PrivateRoute path="/rquery">
         <ReactQueryExample />
-      </Route>
-      <Route path="/contentful">
+      </PrivateRoute>
+      <PrivateRoute path="/contentful">
         <Contentful />
+      </PrivateRoute>
+      <PrivateRoute path="/profile">
+        <Profile />
+      </PrivateRoute>
+      <Route path="/login">
+        <Login />
       </Route>
     </Switch>
   );

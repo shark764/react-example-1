@@ -1,19 +1,19 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl-hooks';
 import { useSelector } from 'react-redux';
-import locale_en from './translations/en.json';
-import locale_es from './translations/es.json';
-import locale_fr from './translations/fr.json';
-import locale_de from './translations/de.json';
+import localeEn from './translations/en.json';
+import localeEs from './translations/es.json';
+import localeFr from './translations/fr.json';
+import localeDe from './translations/de.json';
 
 const data = {
-  es: locale_es,
-  en: locale_en,
-  fr: locale_fr,
-  de: locale_de,
+  es: localeEs,
+  en: localeEn,
+  fr: localeFr,
+  de: localeDe,
 };
 
-function LanguageProvider(props) {
+function LanguageProvider({ children }) {
   const language = useSelector((state) => state.configuration.language);
 
   return (
@@ -22,7 +22,7 @@ function LanguageProvider(props) {
       messages={data[language]}
       defaultLocale="en"
     >
-      {props.children}
+      {children}
     </IntlProvider>
   );
 }

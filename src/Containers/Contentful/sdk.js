@@ -16,20 +16,6 @@ const clientManagement = contentfulManagement.createClient({
   accessToken: ACCESS_TOKEN_MANAGEMENT,
 });
 
-export async function getEntries(query) {
-  try {
-    const entries = await client.getEntries(query);
-    return dataTransformer(entries.items);
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
-
-export function dataTransformer(data) {
-  return data.map(entryTransformer);
-}
-
 export function entryTransformer({ fields, sys }) {
   return {
     ...fields,
@@ -38,20 +24,18 @@ export function entryTransformer({ fields, sys }) {
   };
 }
 
-export function createEntry(values) {
-  return (
-    clientManagement
-      .getSpace(SPACE_ID)
-      .then((space) => space.getEnvironment(ENVIRONMENT))
-      .then((environment) => environment.createEntry('users', formatBody(values)))
-      /**
-       * Entry will be added as a draft,
-       * until we publish it
-       */
-      .then((entry) => entry.publish())
-      .then(createdEntryTransformer)
-      .catch(console.error)
-  );
+export function dataTransformer(data) {
+  return data.map(entryTransformer);
+}
+
+export async function getEntries(query) {
+  try {
+    const entries = await client.getEntries(query);
+    return dataTransformer(entries.items);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 
 export function createdEntryTransformer({ fields, sys }) {
@@ -77,14 +61,28 @@ function formatBody(values) {
   return { fields };
 }
 
-export async function getAssets() {
-  try {
-    const entries = await client.getAssets();
-    return assetTransformer(entries.items);
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
+export function createEntry(values) {
+  return (
+    clientManagement
+      .getSpace(SPACE_ID)
+      .then((space) => space.getEnvironment(ENVIRONMENT))
+      .then((environment) => environment.createEntry('users', formatBody(values)))
+      /**
+       * Entry will be added as a draft,
+       * until we publish it
+       */
+      .then((entry) => entry.publish())
+      .then(createdEntryTransformer)
+      .catch(console.error)
+  );
+}
+
+export function imageTransformer({ fields, sys }) {
+  return {
+    ...fields,
+    id: sys.id,
+    createdAt: sys.createdAt,
+  };
 }
 
 export function assetTransformer(data) {
@@ -96,10 +94,12 @@ export function assetTransformer(data) {
     .map(imageTransformer);
 }
 
-export function imageTransformer({ fields, sys }) {
-  return {
-    ...fields,
-    id: sys.id,
-    createdAt: sys.createdAt,
-  };
+export async function getAssets() {
+  try {
+    const entries = await client.getAssets();
+    return assetTransformer(entries.items);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }

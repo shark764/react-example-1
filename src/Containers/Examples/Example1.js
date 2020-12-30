@@ -25,26 +25,28 @@ class Example1 extends Component {
   render() {
     // console.log("I'm rendering!! again");
     // console.log(this.props);
+    const { shared } = this.props;
+    const { label, number } = this.state;
 
-    const [sharedText, setSharedText] = this.props.shared;
+    const [sharedText, setSharedText] = shared;
 
     return (
       <div className="example">
-        I'm a class
+        I&#39;m a class
         <br />
         <span>I can have state!!!</span>
         <br />
-        {this.state.number * 10}
+        {number * 10}
         <input
           type="number"
-          value={this.state.number}
+          value={number}
           onChange={(event) => this.changeNumer(event.target.value)}
         />
         <br />
-        {this.state.label.replace('hello', 'good day')}
+        {label.replace('hello', 'good day')}
         <input
           type="text"
-          value={this.state.label}
+          value={label}
           onChange={(event) => this.changeText(event.target.value)}
         />
         <div className="App-shared">

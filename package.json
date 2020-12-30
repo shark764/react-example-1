@@ -2,8 +2,9 @@
   "name": "react-example-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shark764.github.io/react-example-1",
+  "homepage": ".",
   "dependencies": {
+    "@auth0/auth0-react": "^1.2.0",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -32,6 +33,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:fix": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects ",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "test1": "node public/javascript-example/test.js",
@@ -57,6 +59,7 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",

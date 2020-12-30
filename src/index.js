@@ -7,16 +7,19 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import LanguageProvider from './intl/LanguageProvider';
 import QueryProvider from './query/QueryProvider';
+import AuthProvider from './auth0/AuthProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <QueryProvider>
-        <LanguageProvider>
-          <App />
-        </LanguageProvider>
-      </QueryProvider>
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <QueryProvider>
+          <LanguageProvider>
+            <App />
+          </LanguageProvider>
+        </QueryProvider>
+      </Provider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

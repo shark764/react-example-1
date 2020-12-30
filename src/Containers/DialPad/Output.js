@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const contacts = [
   { number: '+123456789', name: 'Jimmy Paige' },
@@ -29,5 +30,8 @@ function Output({ output }) {
     </div>
   );
 }
+Output.propTypes = {
+  output: PropTypes.string.isRequired,
+};
 
 export default Output;
