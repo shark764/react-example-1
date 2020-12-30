@@ -10,7 +10,7 @@ function User({ user }) {
           return (
             <td key={index.toString()}>
               {DateTime.fromISO(cell).toLocaleString(
-                DateTime.DATETIME_FULL_WITH_SECONDS
+                DateTime.DATETIME_FULL_WITH_SECONDS,
               )}
             </td>
           );
@@ -19,9 +19,9 @@ function User({ user }) {
           return (
             <td key={index.toString()}>
               {cell === 'Male' ? (
-                <i className="fa fa-male" style={{ color: 'lightskyblue' }}></i>
+                <i className="fa fa-male" style={{ color: 'lightskyblue' }} />
               ) : (
-                <i className="fa fa-female" style={{ color: 'lightcoral' }}></i>
+                <i className="fa fa-female" style={{ color: 'lightcoral' }} />
               )}
             </td>
           );
@@ -30,12 +30,12 @@ function User({ user }) {
           return (
             <td key={index.toString()}>
               {cell === 'Active' ? (
-                <i className="fa fa-check" style={{ color: 'lightgreen' }}></i>
+                <i className="fa fa-check" style={{ color: 'lightgreen' }} />
               ) : (
                 <i
                   className="fa fa-user-slash"
                   style={{ color: 'lightsalmon' }}
-                ></i>
+                />
               )}
             </td>
           );

@@ -2,8 +2,6 @@ import { Box, Text } from 'grommet';
 import { StatusCritical, StatusGood } from 'grommet-icons';
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useDispatch } from 'react-redux';
-import { createUser } from '../../../redux/thunks';
 import { createEntry } from '../sdk';
 import FormLayout from './FormLayout';
 
@@ -12,19 +10,14 @@ function Form() {
 
   const queryClient = useQueryClient();
 
-  const postMutation = useMutation(
-    function (data) {
-      return createEntry(data);
+  const postMutation = useMutation((data) => createEntry(data), {
+    onSuccess() {
+      queryClient.invalidateQueries('contentfulFetchUsers');
     },
-    {
-      onSuccess: function (args) {
-        queryClient.invalidateQueries('contentfulFetchUsers');
-      },
-      onError: function (err) {
-        console.error(err);
-      },
-    }
-  );
+    onError(err) {
+      console.error(err);
+    },
+  });
 
   const onSubmit = (values) => {
     const payload = {
@@ -44,7 +37,9 @@ function Form() {
       {postMutation.isSuccess && (
         <Box direction="row" gap="medium">
           <Text color="brand">
-            User created successfully... <StatusGood color="brand" />
+            User created successfully...
+            {' '}
+            <StatusGood color="brand" />
           </Text>
         </Box>
       )}
@@ -52,7 +47,9 @@ function Form() {
       {postMutation.isError && (
         <Box direction="row" gap="medium">
           <Text color="accent-1">
-            An error has occurred... <StatusCritical color="accent-1" />
+            An error has occurred...
+            {' '}
+            <StatusCritical color="accent-1" />
           </Text>
         </Box>
       )}

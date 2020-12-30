@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import { Text } from 'grommet';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  useCallback, useContext, useEffect, useState,
+} from 'react';
 import { log } from '../../../utils';
 import Data from '../Components/Data';
 import { PageContext } from '../Context';
@@ -17,7 +19,7 @@ function BasicFetch() {
     // callback
     try {
       const { data } = await Axios.get(
-        `https://gorest.co.in/public-api/users?page=${page}`
+        `https://gorest.co.in/public-api/users?page=${page}`,
       );
       // Here we go again retrieving your data
       setUsers(data.data);

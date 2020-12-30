@@ -39,18 +39,16 @@ function DialPad() {
 
         <div className="dialpad-rows">
           <div className="dialpad-row">
-            {digits.map((digit) => {
-              return (
-                <Digit key={digit.digit.toString()} {...digit} onPress={dial} />
-              );
-            })}
+            {digits.map((digit) => (
+              <Digit key={digit.digit.toString()} {...digit} onPress={dial} />
+            ))}
           </div>
 
           <div className="dialpad-row dialpad-footer">
-            <Digit digit="+" onPress={dial}></Digit>
+            <Digit digit="+" onPress={dial} />
             <Caller number={output} />
             <Digit onPress={onDelete}>
-              <i className="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+              <i className="fa fa-long-arrow-alt-left" aria-hidden="true" />
             </Digit>
           </div>
         </div>

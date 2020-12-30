@@ -1,10 +1,14 @@
 import Axios from 'axios';
-import { Box, Button, DataTable, Text } from 'grommet';
-import { Actions, StatusDisabled, StatusGood, Tree } from 'grommet-icons';
-import React, { useEffect } from 'react';
+import {
+  Box, Button, DataTable, Text,
+} from 'grommet';
+import {
+  Actions, StatusDisabled, StatusGood, Tree,
+} from 'grommet-icons';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories, setCurrentCategory } from '../../redux/thunks';
+import { setCurrentCategory } from '../../redux/thunks';
 
 function ReduxToolkitExample() {
   // const categories = useSelector((state) => state.data.categories);
@@ -15,19 +19,12 @@ function ReduxToolkitExample() {
   //   dispatch(getCategories());
   // }, [dispatch]);
 
-  const { data: categories, error, isLoading, isFetching, status } = useQuery(
-    'categories',
-    function () {
-      return Axios.get('https://gorest.co.in/public-api/categories')
-        .then((result) => {
-          return result.data.data;
-        })
-        .catch((err) => {
-          console.error(err);
-          return [];
-        });
-    }
-  );
+  const { data: categories } = useQuery('categories', () => Axios.get('https://gorest.co.in/public-api/categories')
+    .then((result) => result.data.data)
+    .catch((err) => {
+      console.error(err);
+      return [];
+    }));
 
   return (
     <Box direction="row" pad="medium" gap="medium">
@@ -40,29 +37,25 @@ function ReduxToolkitExample() {
             {
               property: 'status',
               header: <Text>Status</Text>,
-              render: (row) => {
-                return row.status ? (
-                  <StatusGood color="brand" />
-                ) : (
-                  <StatusDisabled color="accent-1" />
-                );
-              },
+              render: (row) => (row.status ? (
+                <StatusGood color="brand" />
+              ) : (
+                <StatusDisabled color="accent-1" />
+              )),
             },
             {
               property: 'actions',
               header: <Actions />,
-              render: (row) => {
-                return (
-                  <Box direction="row">
-                    <Button
-                      type="button"
-                      onClick={() => dispatch(setCurrentCategory(row.id))}
-                      icon={<Tree color="brand" />}
-                      plain
-                    />
-                  </Box>
-                );
-              },
+              render: (row) => (
+                <Box direction="row">
+                  <Button
+                    type="button"
+                    onClick={() => dispatch(setCurrentCategory(row.id))}
+                    icon={<Tree color="brand" />}
+                    plain
+                  />
+                </Box>
+              ),
             },
           ]}
           data={categories}
@@ -77,25 +70,31 @@ function ReduxToolkitExample() {
               {
                 property: 'price',
                 header: <Text>Price</Text>,
-                render: (row) => <Text>$ {row.price}</Text>,
+                render: (row) => (
+                  <Text>
+                    $
+                    {row.price}
+                  </Text>
+                ),
               },
               {
                 property: 'discount_amount',
                 header: <Text>Discount Price</Text>,
                 render: (row) => (
-                  <Text color="accent-2">$ ${row.discount_amount}</Text>
+                  <Text color="accent-2">
+                    $ $
+                    {row.discount_amount}
+                  </Text>
                 ),
               },
               {
                 property: 'status',
                 header: <Text>Status</Text>,
-                render: (row) => {
-                  return row.status ? (
-                    <StatusGood color="brand" />
-                  ) : (
-                    <StatusDisabled color="accent-1" />
-                  );
-                },
+                render: (row) => (row.status ? (
+                  <StatusGood color="brand" />
+                ) : (
+                  <StatusDisabled color="accent-1" />
+                )),
               },
               {
                 property: 'description',

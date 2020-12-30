@@ -9,7 +9,7 @@ function FormRow() {
   const onSubmit = (values) => {
     console.log('values submitted', values);
 
-    Axios.post(`https://gorest.co.in/public-api/users`, values, {
+    Axios.post('https://gorest.co.in/public-api/users', values, {
       headers: {
         Authorization: `Bearer ${gorestToken}`,
       },
@@ -41,7 +41,9 @@ function FormRow() {
       </select>
 
       <button type="submit" disabled={formState.isSubmitting}>
-        Send <i className="fa fa-paper-plane"></i>
+        Send
+        {' '}
+        <i className="fa fa-paper-plane" />
       </button>
     </form>
   );

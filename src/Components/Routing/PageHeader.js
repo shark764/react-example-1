@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Header, Nav, Select, Text, TextInput } from 'grommet';
+import {
+  Box, Header, Nav, Select, Text, TextInput,
+} from 'grommet';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Calculator,
@@ -79,15 +81,13 @@ function PageHeader() {
       </Text>
 
       <Nav direction="row">
-        {links.map((link) => {
-          return (
-            <Link key={link.to} to={link.to} title={link.text}>
-              {link.icon({
-                color: link.to === location.pathname ? 'accent-2' : 'accent-1',
-              })}
-            </Link>
-          );
-        })}
+        {links.map((link) => (
+          <Link key={link.to} to={link.to} title={link.text}>
+            {link.icon({
+              color: link.to === location.pathname ? 'accent-2' : 'accent-1',
+            })}
+          </Link>
+        ))}
       </Nav>
 
       {location.pathname === '/contentful' && (
@@ -96,9 +96,7 @@ function PageHeader() {
             icon={<Search />}
             placeholder="search ..."
             value={searchString}
-            onChange={(event) =>
-              dispatch(setSearchString(event.target.value || ''))
-            }
+            onChange={(event) => dispatch(setSearchString(event.target.value || ''))}
           />
         </Box>
       )}

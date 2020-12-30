@@ -14,6 +14,7 @@
     "grommet": "^2.16.0",
     "grommet-icons": "^4.5.0",
     "luxon": "^1.25.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.13.0",
@@ -33,7 +34,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test1": "node public/javascript-example/test.js"
+    "test1": "node public/javascript-example/test.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +57,12 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "gh-pages": "^3.1.0"
   }
 }

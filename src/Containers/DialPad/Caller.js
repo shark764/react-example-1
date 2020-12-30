@@ -11,7 +11,7 @@ function Caller({ number }) {
       <i
         className={`fa ${calling ? 'fa-phone-slash' : 'fa-phone'}`}
         aria-hidden="true"
-      ></i>
+      />
     </div>
   );
 }

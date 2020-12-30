@@ -1,6 +1,8 @@
 import React from 'react';
 
-function Digit({ digit, letters = [], onPress, children }) {
+function Digit({
+  digit, letters = [], onPress, children,
+}) {
   return (
     <div className="dialpad-digit" onClick={() => onPress(digit)}>
       {digit && <span>{digit}</span>}

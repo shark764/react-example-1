@@ -1,8 +1,12 @@
 import Axios from 'axios';
-import { Box, DataTable, Heading, Text } from 'grommet';
-import { StatusDisabled, StatusGood, User, UserFemale } from 'grommet-icons';
+import {
+  Box, DataTable, Heading, Text,
+} from 'grommet';
+import {
+  StatusDisabled, StatusGood, User, UserFemale,
+} from 'grommet-icons';
 import { DateTime } from 'luxon';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 
 function Users() {
@@ -20,19 +24,12 @@ function Users() {
   //   fetchUsers();
   // }, [fetchUsers]);
 
-  const { data, error, isLoading, isFetching, status } = useQuery(
-    'users',
-    function () {
-      return Axios.get('https://gorest.co.in/public-api/users')
-        .then((result) => {
-          return result.data.data;
-        })
-        .catch((err) => {
-          console.error(err);
-          return [];
-        });
-    }
-  );
+  const { data } = useQuery('users', () => Axios.get('https://gorest.co.in/public-api/users')
+    .then((result) => result.data.data)
+    .catch((err) => {
+      console.error(err);
+      return [];
+    }));
   const users = data;
 
   return (
@@ -46,40 +43,34 @@ function Users() {
             {
               property: 'gender',
               header: <Text>Gender</Text>,
-              render: (row) => {
-                return row.gender === 'Male' ? (
-                  <User color="brand" />
-                ) : (
-                  <UserFemale color="accent-1" />
-                );
-              },
+              render: (row) => (row.gender === 'Male' ? (
+                <User color="brand" />
+              ) : (
+                <UserFemale color="accent-1" />
+              )),
             },
             {
               property: 'status',
               header: <Text>Status</Text>,
-              render: (row) => {
-                return row.status === 'Active' ? (
-                  <StatusGood color="brand" />
-                ) : (
-                  <StatusDisabled color="accent-1" />
-                );
-              },
+              render: (row) => (row.status === 'Active' ? (
+                <StatusGood color="brand" />
+              ) : (
+                <StatusDisabled color="accent-1" />
+              )),
             },
             {
               property: 'created_at',
               header: <Text>Created At</Text>,
-              render: (row) =>
-                DateTime.fromISO(row.created_at).toLocaleString(
-                  DateTime.DATETIME_MED
-                ),
+              render: (row) => DateTime.fromISO(row.created_at).toLocaleString(
+                DateTime.DATETIME_MED,
+              ),
             },
             {
               property: 'updated_at',
               header: <Text>Updated At</Text>,
-              render: (row) =>
-                DateTime.fromISO(row.updated_at).toLocaleString(
-                  DateTime.DATETIME_MED
-                ),
+              render: (row) => DateTime.fromISO(row.updated_at).toLocaleString(
+                DateTime.DATETIME_MED,
+              ),
             },
           ]}
           data={users}

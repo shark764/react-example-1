@@ -12,7 +12,9 @@ import {
   Text,
   TextInput,
 } from 'grommet';
-import { Close, MailOption, Refresh, UserAdd } from 'grommet-icons';
+import {
+  Close, MailOption, Refresh, UserAdd,
+} from 'grommet-icons';
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { gorestToken, log } from '../../../utils';
@@ -24,19 +26,18 @@ function LayoutForm({ onClose }) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    (payload) =>
-      Axios.post('https://gorest.co.in/public-api/users', payload, {
-        headers: {
-          Authorization: `Bearer ${gorestToken}`,
-        },
-      }),
+    (payload) => Axios.post('https://gorest.co.in/public-api/users', payload, {
+      headers: {
+        Authorization: `Bearer ${gorestToken}`,
+      },
+    }),
     {
-      onSuccess: function () {
+      onSuccess() {
         // Invalidate and refetch
         queryClient.invalidateQueries('users');
         log('info', 'user added successfully');
       },
-    }
+    },
   );
 
   const onSubmit = (values) => {
@@ -60,7 +61,9 @@ function LayoutForm({ onClose }) {
       <Box fill="vertical" overflow="auto" width="medium" pad="medium">
         <Box flex={false} direction="row" justify="between">
           <Heading level={2} margin="none">
-            <UserAdd /> Add a user
+            <UserAdd />
+            {' '}
+            Add a user
           </Heading>
           <Button icon={<Close />} onClick={onClose} />
         </Box>
@@ -68,7 +71,9 @@ function LayoutForm({ onClose }) {
         {mutation.isLoading && (
           <Box align="center">
             <Text color="accent-3">
-              Adding user... <Refresh color="accent-3" />
+              Adding user...
+              {' '}
+              <Refresh color="accent-3" />
             </Text>
           </Box>
         )}

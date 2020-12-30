@@ -5,7 +5,10 @@ function renderComp(props) {
   return (
     <div>
       I love ReactJs
-      <p>Hello World, I'm {props.name}</p>
+      <p>
+        Hello World, I'm
+        {props.name}
+      </p>
     </div>
   );
 }

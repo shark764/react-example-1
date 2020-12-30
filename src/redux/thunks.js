@@ -19,7 +19,7 @@ const {
 export function getCategories() {
   return async (dispatch) => {
     const { data } = await Axios.get(
-      'https://gorest.co.in/public-api/categories'
+      'https://gorest.co.in/public-api/categories',
     );
 
     const categories = data.data;
@@ -28,32 +28,28 @@ export function getCategories() {
   };
 }
 
+export function getProducts() {
+  return async (dispatch, getState) => {
+    const { selectedCategory } = getState().data;
+
+    const { data } = await Axios.get(
+      'https://gorest.co.in/public-api/products',
+    );
+
+    const products = data.data.filter((product) => product.categories.find((category) => category.id === selectedCategory));
+
+    dispatch(setProducts(products));
+  };
+}
+
 export function setCurrentCategory(id) {
   return async (dispatch, getState) => {
-    const selectedCategory = getState().data.selectedCategory;
+    const { selectedCategory } = getState().data;
 
     if (selectedCategory !== id) {
       dispatch(setSelectedCategory(id));
       dispatch(getProducts());
     }
-  };
-}
-
-export function getProducts() {
-  return async (dispatch, getState) => {
-    const selectedCategory = getState().data.selectedCategory;
-
-    const { data } = await Axios.get(
-      'https://gorest.co.in/public-api/products'
-    );
-
-    const products = data.data.filter((product) => {
-      return product.categories.find(
-        (category) => category.id === selectedCategory
-      );
-    });
-
-    dispatch(setProducts(products));
   };
 }
 
@@ -79,7 +75,7 @@ export function createUser(values) {
       log(
         'success',
         `Entry with id: "${entry.id}" was created and published.`,
-        entry
+        entry,
       );
       dispatch(addUser(entry));
     } catch (error) {
@@ -89,7 +85,7 @@ export function createUser(values) {
 }
 
 export function getImages() {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     const assets = await getAssets();
 
     log('info', 'Assets retrieved', assets);

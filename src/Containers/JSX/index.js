@@ -35,38 +35,30 @@ function JSX() {
 
   const onRemove = (value) => {
     console.log('element to remove', value);
-    setChildren((prevChildren) =>
-      prevChildren.filter((item) => {
-        return item !== value;
-      })
-    );
+    setChildren((prevChildren) => prevChildren.filter((item) => item !== value));
   };
 
   return (
     <div>
       <span>
-        Hello! {` `}
+        Hello!
+        {' '}
+        {' '}
         {2 + 2}
       </span>
 
-      {animals.map((item) => {
-        return (
-          <div key={item} style={{ display: 'inline', margin: 15 }}>
-            <span>{item}</span>
-          </div>
-        );
-      })}
+      {animals.map((item) => (
+        <div key={item} style={{ display: 'inline', margin: 15 }}>
+          <span>{item}</span>
+        </div>
+      ))}
 
       <hr />
-      {fruits.map((item) => {
-        return <Fruit key={item} value={item} />;
-      })}
+      {fruits.map((item) => <Fruit key={item} value={item} />)}
 
       <hr />
 
-      {users.map((item) => {
-        return <User key={item.email} value={item} />;
-      })}
+      {users.map((item) => <User key={item.email} value={item} />)}
 
       <hr />
 
@@ -87,9 +79,7 @@ function JSX() {
         value="list of children from state"
         style={{ color: 'lightgreen' }}
       >
-        {children.map((item) => {
-          return <Child key={item} value={item} onRemove={onRemove} />;
-        })}
+        {children.map((item) => <Child key={item} value={item} onRemove={onRemove} />)}
 
         <input type="number" name="" id="" onKeyDown={handleKeyDown} />
       </Wrapper>
